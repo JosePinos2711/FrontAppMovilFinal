@@ -1,0 +1,27 @@
+name: app_flutter
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.4 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+  flutter_spinkit: ^5.1.0  # Asegúrate de que esta línea esté correctamente indentada
+  flutter_tex: ^4.0.6
+  http: ^1.2.1
+  crypto: ^3.0.1
+  shared_preferences: ^2.0.6
+  
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+
+flutter:
+  uses-material-design: true

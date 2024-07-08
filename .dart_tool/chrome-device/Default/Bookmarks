@@ -1,0 +1,89 @@
+{
+   "checksum": "4dc6a13cd7f7ba60e898fc4b32b3ac02",
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "date_added": "13360717008860234",
+            "date_last_used": "0",
+            "guid": "f334b640-4e69-4067-8bbc-e88c1818c815",
+            "id": "9",
+            "name": "Amazon",
+            "show_icon": false,
+            "source": "oem_preload",
+            "type": "url",
+            "url": "https://s3.amazonaws.com/amundsen/redirect/19q2/amazon.html?utm_source=win32&utm_medium=favorite"
+         }, {
+            "date_added": "13360717008860015",
+            "date_last_used": "0",
+            "guid": "5791102f-20d0-484c-a7b2-9dce1a8fdd8e",
+            "id": "8",
+            "name": "Booking.com",
+            "show_icon": false,
+            "source": "oem_preload",
+            "type": "url",
+            "url": "https://s3.amazonaws.com/amundsen/redirect/19q2/booking.html?utm_source=win32&utm_medium=favorite"
+         }, {
+            "date_added": "13360717008859104",
+            "date_last_used": "0",
+            "guid": "181b558f-8b6e-4d26-a5c1-5306a6e8ae09",
+            "id": "7",
+            "name": "Facebook",
+            "show_icon": false,
+            "source": "oem_preload",
+            "type": "url",
+            "url": "https://s3.amazonaws.com/amundsen/redirect/20q2/facebook.html?utm_source=win32&utm_medium=favorite"
+         }, {
+            "children": [ {
+               "date_added": "13314226733792640",
+               "date_last_used": "0",
+               "guid": "febd82a1-efc5-4fc1-baa6-743c2492f4a8",
+               "id": "11",
+               "name": "Acer",
+               "show_icon": false,
+               "source": "import_fre",
+               "type": "url",
+               "url": "http://www.acer.com/"
+            } ],
+            "date_added": "13360717012803664",
+            "date_last_used": "0",
+            "date_modified": "0",
+            "guid": "716b1443-04e1-4af5-9170-cacf334811da",
+            "id": "10",
+            "name": "Acer",
+            "source": "import_fre",
+            "type": "folder"
+         } ],
+         "date_added": "13360717008477305",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "0bc5d13f-2cba-5d74-951f-3f233fe6c908",
+         "id": "1",
+         "name": "Barra de favoritos",
+         "source": "unknown",
+         "type": "folder"
+      },
+      "other": {
+         "children": [  ],
+         "date_added": "13360717008477308",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "82b081ec-3dd3-529c-8475-ab6c344590dd",
+         "id": "2",
+         "name": "Otros favoritos",
+         "source": "unknown",
+         "type": "folder"
+      },
+      "synced": {
+         "children": [  ],
+         "date_added": "13360717008477311",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "4cf2e351-0e85-532b-bb37-df045d8f8d0f",
+         "id": "3",
+         "name": "Favoritos móviles",
+         "source": "unknown",
+         "type": "folder"
+      }
+   },
+   "version": 1
+}

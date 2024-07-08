@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'CarAnimationScreen.dart'; // Importa la pantalla de animación del carrito
-import 'login_screen.dart'; // Importa la pantalla de inicio de sesión
-import 'userdatascreen.dart'; // Importa la pantalla de datos del usuario
-import 'publishvehiclescreen.dart'; // Importa la pantalla de publicar vehículo
-import 'managepublicationsscreen.dart'; // Importa la pantalla de gestión de publicaciones
-import 'user_state.dart'; // Importa el singleton de estado de usuario
+import 'CarAnimationScreen.dart';
+import 'login_screen.dart';
+import 'userdatascreen.dart';
+import 'publishvehiclescreen.dart';
+import 'managepublicationsscreen.dart';
+import 'user_state.dart';
+import 'PublishmotoScreen.dart';
+import 'reservaScreen.dart';
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -45,6 +47,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   'description': vehicle['description']?.toString() ?? 'Sin descripción',
                   'imagen': vehicle['imagen']?.toString() ?? '',
                   'type': vehicle['type']?.toString() ?? '',
+                  'color': vehicle['color']?.toString() ?? '',
+                  'mileage': vehicle['mileage']?.toString() ?? '',
+                  'plate': vehicle['plate']?.toString() ?? '',
+                  'userId': vehicle['userId']?.toString() ?? '',
                 };
               })
               .where((vehicle) => vehicle['imagen']!.isNotEmpty)
@@ -116,6 +122,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
+  void _navigateToPublishMoto(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => PublishMotoScreen()),
+    );
+  }
+
+  void _navigateToReservaScreen(BuildContext context, Map<String, String> vehicle) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ReservaScreen(vehicle: vehicle)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     String? username = UserState().username;
@@ -147,8 +167,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               _selectedCategory = value!;
                             });
                           },
-                          items: <String>['Todos', 'Nuevo', 'Usado']
-                              .map<DropdownMenuItem<String>>((String value) {
+                          items: <String>['Todos', 'Auto', 'Moto'].map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
                               child: Text(value),
@@ -268,10 +287,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.group, color: Colors.orange),
-              title: Text('Grupos', style: TextStyle(color: Colors.orange, fontFamily: 'Pixel')),
+              leading: Icon(Icons.motorcycle, color: Colors.orange),
+              title: Text('Publicar Moto', style: TextStyle(color: Colors.orange, fontFamily: 'Pixel')),
               onTap: () {
                 Navigator.pop(context);
+                _navigateToPublishMoto(context);
               },
             ),
             ListTile(
@@ -316,31 +336,75 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: ListTile(
-                              contentPadding: EdgeInsets.all(15),
-                              title: Text(
-                                vehicle['brand']!,
-                                style: TextStyle(color: Colors.orange, fontFamily: 'Pixel', fontSize: 18),
-                              ),
-                              subtitle: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    vehicle['description']!,
-                                    style: TextStyle(color: Colors.grey[700], fontSize: 14),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+                                  child: Image.network(
+                                    vehicle['imagen']!,
+                                    fit: BoxFit.cover,
+                                    width: double.infinity,
+                                    height: 200,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Container(
+                                        color: Colors.grey,
+                                        height: 200,
+                                        child: Center(
+                                          child: Text('Error al cargar la imagen'),
+                                        ),
+                                      );
+                                    },
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 8.0),
-                                    child: Image.network(
-                                      vehicle['imagen']!,
-                                      fit: BoxFit.cover,
-                                      errorBuilder: (context, error, stackTrace) {
-                                        return Text('Error al cargar la imagen');
-                                      },
-                                    ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        vehicle['brand']!,
+                                        style: TextStyle(color: Colors.orange, fontFamily: 'Pixel', fontSize: 18),
+                                      ),
+                                      Text(
+                                        vehicle['description']!,
+                                        style: TextStyle(color: Colors.grey[700], fontSize: 14),
+                                      ),
+                                      Text(
+                                        'Color: ${vehicle['color']!}',
+                                        style: TextStyle(color: Colors.grey[700], fontSize: 14),
+                                      ),
+                                      Text(
+                                        'Mileage: ${vehicle['mileage']!}',
+                                        style: TextStyle(color: Colors.grey[700], fontSize: 14),
+                                      ),
+                                      Text(
+                                        'Plate: ${vehicle['plate']!}',
+                                        style: TextStyle(color: Colors.grey[700], fontSize: 14),
+                                      ),
+                                      Text(
+                                        'Type: ${vehicle['type']!}',
+                                        style: TextStyle(color: Colors.grey[700], fontSize: 14),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        '\$1000',
+                                        style: TextStyle(color: Colors.pink, fontFamily: 'Pixel', fontSize: 16),
+                                      ),
+                                      ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.pink,
+                                          foregroundColor: Colors.white,
+                                        ),
+                                        child: Text('Reservar'),
+                                        onPressed: () {
+                                          _navigateToReservaScreen(context, vehicle);
+                                        },
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           );
                         },
